@@ -2,6 +2,7 @@
 const express = require('express')
 const app = express()
 const path = require('path')
+const port = process.env.PORT || 3000
 
 const staticPath = path.join(__dirname, "../public")
 
@@ -23,6 +24,6 @@ app.get('/', (req, res) => {
 app.get("/utsav", (req, res) => {
     res.end("ya ya")
 })
-app.listen(3000, () => {
+app.listen(port, () => {
     console.log("listen at 3000 port")
 })
