@@ -24,5 +24,5 @@ app.get("/utsav", (req, res) => {
     res.end("ya ya")
 })
 app.listen(3000, () => {
-    console.log("listen at 3000")
+    console.log("listen at 3000 port")
 })
