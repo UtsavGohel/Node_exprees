@@ -25,19 +25,43 @@ const Playlist = new mongoose.model('playlist', playlistSchema);
 
 // create document or insert
 const craeteDocument = async() => {
-    try {
-        const reactPlaylist = new Playlist({
-            name: "Node JS",
-            ctype: "Back-end",
-            author: "Hemangini",
-            active: true
-        })
-        const result = await reactPlaylist.save()
-        console.log(result)
+        try {
+            const reactPlaylist = new Playlist({
+                name: "React JS",
+                ctype: "Front-end",
+                author: "Hemangini",
+                active: true
+            })
+            const NodePlaylist = new Playlist({
+                name: "Node JS",
+                ctype: "Back-end",
+                author: "Utsav",
+                active: true
+            })
+            const mongoosePlaylist = new Playlist({
+                name: "mongoose",
+                ctype: "Database",
+                author: "Hemangini",
+                active: true
+            })
+            const result = await Playlist.insertMany([mongoosePlaylist, NodePlaylist, reactPlaylist])
+            console.log(result)
 
+        } catch (err) {
+            console.log(err)
+        }
+    }
+    // craeteDocument()
+const getDocument = async() => {
+    try {
+        const result = await Playlist.find({ name: "React JS" })
+            .select({ name: 1 })
+            .limit(1)
+
+        console.log(result)
     } catch (err) {
         console.log(err)
     }
-}
 
-craeteDocument()
+}
+getDocument()
