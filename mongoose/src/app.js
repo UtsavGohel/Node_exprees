@@ -54,9 +54,14 @@ const craeteDocument = async() => {
     // craeteDocument()
 const getDocument = async() => {
     try {
-        const result = await Playlist.find({ name: "React JS" })
-            .select({ name: 1 })
-            .limit(1)
+        const result = await Playlist
+            .find({
+                $not: [{ ctype: "front-end" },
+                    { author: "guddi" }
+                ]
+            })
+            // .select({ name: 1 })
+            // .limit(1)
 
         console.log(result)
     } catch (err) {
