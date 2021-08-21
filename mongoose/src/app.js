@@ -7,19 +7,20 @@ mongoose.connect("mongodb://localhost:27017/byVsCode", { useNewUrlParser: true, 
 
 
 const playlistSchema = new mongoose.Schema({
-    name: {
-        type: String,
-        //here if we want to need value than we add require field
-        required: true
-    },
-    ctype: String,
-    author: String,
-    active: Boolean,
-    date: {
-        type: Date,
-        default: Date.now
-    }
-})
+        name: {
+            type: String,
+            //here if we want to need value than we add require field
+            required: true
+        },
+        ctype: String,
+        author: String,
+        active: Boolean,
+        date: {
+            type: Date,
+            default: Date.now
+        }
+    })
+    //create collection name playlist
 const Playlist = new mongoose.model('playlist', playlistSchema);
 
 
@@ -56,17 +57,20 @@ const getDocument = async() => {
     try {
         const result = await Playlist
             .find({
-                $not: [{ ctype: "front-end" },
+                $or: [{ ctype: "front-end" },
                     { author: "guddi" }
                 ]
-            })
-            // .select({ name: 1 })
-            // .limit(1)
+            }).
+        countDocuments()
+
+        // .select({ name: 1 })
+        // .limit(1)
 
         console.log(result)
     } catch (err) {
         console.log(err)
     }
-
 }
 getDocument()
+
+//update the documents
