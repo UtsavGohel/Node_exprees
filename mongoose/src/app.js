@@ -74,3 +74,31 @@ const getDocument = async() => {
 getDocument()
 
 //update the documents
+const updateDocument = async(_id) => {
+        try {
+            const result = await Playlist.findByIdAndUpdate({ _id }, {
+                $set: {
+                    name: "Angular 5",
+                    author: "Ms.Hemangini Gohel"
+                }
+            }, {
+                useFindAndModify: false
+            })
+            console.log(result)
+        } catch (err) {
+            console.log(err)
+        }
+    }
+    // updateDocument("611e4c53a2521120d2724c69")
+    // delete the documents
+
+const deleteDocument = async(_id) => {
+    try {
+        const result = await Playlist.findByIdAndDelete({ _id })
+        console.log(result)
+    } catch (err) {
+        console.log(err)
+    }
+}
+
+// deleteDocument("611cfd703666f543a8a642d9")
